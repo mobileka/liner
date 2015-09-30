@@ -165,7 +165,7 @@ class Liner implements LinerInterface
             return call_user_func_array([$this->getFile(), $method], $args);
         }
 
-        $class = static::class;
+        $class = __CLASS__;
         $trace = debug_backtrace();
         $file = $trace[0]['file'];
         $line = $trace[0]['line'];
