@@ -1,6 +1,6 @@
 {
     "name": "mobileka/liner",
-    "description": "Liner is an simple file reader",
+    "description": "Liner is a simple file reader",
     "keywords": ["file", "reader", "limit", "offset"],
     "license": "MIT",
     "authors": [
