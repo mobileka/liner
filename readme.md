@@ -4,6 +4,8 @@
 
 Liner is a dead simple file reader which allows setting offset and limit (by lines).
 
+Requires PHP 5.4 or newer.
+
 ## Installation
 
 `composer require mobileka/liner`
@@ -35,7 +37,7 @@ $iHateExclamationMarks = $liner->read(0, 0, function($file, $line) {
     return str_replace('!', '', $line);
 });
 
-// almost forgot to mention that you can get number of lines
+// almost forgot to mention that you can get the number of lines
 $liner->getNumberOfLines();
 
 // and that you can also delegate methods to SplFileObject
