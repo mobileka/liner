@@ -13,11 +13,6 @@ class Liner implements LinerInterface
     protected $file;
 
     /**
-     * @var array
-     */
-    protected $data = [];
-
-    /**
      * @param string|SplFileObject $file
      */
     public function __construct($file)
@@ -170,6 +165,5 @@ class Liner implements LinerInterface
         $file = $trace[0]['file'];
         $line = $trace[0]['line'];
         trigger_error("Call to undefined method $class::$method() in $file on line $line", E_USER_ERROR);
-
     } // @codeCoverageIgnore
 }
