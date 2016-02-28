@@ -13,6 +13,11 @@ class Liner implements LinerInterface
     protected $file;
 
     /**
+     * @var int
+     */
+    protected $numberOfLines;
+
+    /**
      * @param string|SplFileObject $file
      */
     public function __construct($file)
@@ -67,6 +72,10 @@ class Liner implements LinerInterface
      */
     public function getNumberOfLines()
     {
+        if (!is_null($this->numberOfLines)) {
+            return $this->numberOfLines;
+        }
+
         $file = $this->getFile();
         $currentPosition = $file->key();
 
@@ -77,7 +86,7 @@ class Liner implements LinerInterface
 
         $file->seek($currentPosition);
 
-        return $result;
+        return $this->numberOfLines = $result;
     }
 
     /**
