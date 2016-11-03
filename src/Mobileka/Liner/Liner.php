@@ -30,9 +30,10 @@ class Liner implements LinerInterface
     }
 
     /**
-     * @param int     $limit
-     * @param int     $offset
+     * @param int $limit
+     * @param int $offset
      * @param Closure $modifier
+     *
      * @return array
      */
     public function read($limit = 0, $offset = 0, Closure $modifier = null)
@@ -56,6 +57,12 @@ class Liner implements LinerInterface
 
             if (!is_null($modifier)) {
                 $line = $modifier($file, $line);
+
+                if (is_null($line)) {
+                    $this->setNumberOfLines($this->getNumberOfLines() - 1);
+                    $file->next();
+                    continue;
+                }
             }
 
             $result[] = $line;
@@ -90,8 +97,17 @@ class Liner implements LinerInterface
     }
 
     /**
+     * @param int $number
+     */
+    protected function setNumberOfLines($number)
+    {
+        $this->numberOfLines = (int) $number;
+    }
+
+    /**
      * @param int $limit
      * @param int $offset
+     *
      * @return int
      */
     public function getLimit($limit = 0, $offset = 0)
@@ -116,6 +132,7 @@ class Liner implements LinerInterface
 
     /**
      * @param int $offset
+     *
      * @return int
      */
     public function getOffset($offset = 0)
@@ -160,7 +177,8 @@ class Liner implements LinerInterface
 
     /**
      * @param string $method
-     * @param array  $args
+     * @param array $args
+     *
      * @return mixed
      */
     public function __call($method, $args)

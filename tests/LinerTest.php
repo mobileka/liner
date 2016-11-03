@@ -172,6 +172,53 @@ class LinerTest extends BaseTestCase
     /**
      * @test
      */
+    public function ignores_modified_value_when_its_null()
+    {
+        // Arrange
+        $file = new Liner($this->file);
+
+        // Act
+        $result = $file->read(0, 0, function ($file, $line) {
+            $line = trim($line);
+
+            if ($line == 'a') {
+                return null;
+            }
+
+            return $line;
+        });
+
+        // Assert
+        assertSame(9, count($result));
+    }
+
+    /**
+     * @test
+     */
+    public function counts_number_of_lines_when_ignores_modified_values()
+    {
+        // Arrange
+        $file = new Liner($this->file);
+        $file->read(0, 0, function ($file, $line) {
+            $line = trim($line);
+
+            if ($line == 'a') {
+                return null;
+            }
+
+            return $line;
+        });
+
+        // Act
+        $result = $file->getNumberOfLines();
+
+        // Assert
+        assertSame(9, $result);
+    }
+
+    /**
+     * @test
+     */
     public function delegates_methods_to_spl_file_object()
     {
         $file = new Liner($this->file);
