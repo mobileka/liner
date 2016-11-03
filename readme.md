@@ -10,11 +10,11 @@ Requires PHP 5.4 or newer.
 
 ## Installation
 
-`composer require mobileka/liner`
+`composer require mobileka/liner:1.1.*`
 
 And sometimes I find myself looking for this line in installation section:
 
-`"mobileka/liner": "1.0.*"`
+`"mobileka/liner": "1.1.*"`
 
 ## Usage
 
@@ -37,7 +37,13 @@ $liner->read(100, 5);
 // You can also pass a closure as a third argument to mutate the result without iterating over it
 // Here's how you can read a CSV file:
 $csvAsArray = $liner->read(0, 0, function($file, $line) {
+    $line = trim($line);
     return explode(',', $line);
+});
+
+// A line will be ignored if modifier returns null
+$anEmptyArray = $liner->read(0, 0, function($file, $line) {
+    return null;
 });
 
 // almost forgot to mention that you can get the number of lines
