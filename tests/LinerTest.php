@@ -5,7 +5,7 @@ namespace tests\Mobileka\Liner;
 use Mobileka\Liner\Liner;
 
 /**
- * @covers Mobileka\Liner\Liner
+ * @covers \Mobileka\Liner\Liner
  */
 class LinerTest extends BaseTestCase
 {
@@ -16,7 +16,7 @@ class LinerTest extends BaseTestCase
 
     public function setUp()
     {
-        $this->file = RESOURCES . 'words';
+        $this->file = RESOURCES.'words';
     }
 
     /**
@@ -24,7 +24,7 @@ class LinerTest extends BaseTestCase
      */
     public function is_instantiable()
     {
-        new Liner(RESOURCES . 'empty');
+        new Liner(RESOURCES.'empty');
     }
 
     /**
